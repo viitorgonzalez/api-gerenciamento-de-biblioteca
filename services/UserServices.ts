@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import { connectDB } from "../config/database";
 
 class UserServices {

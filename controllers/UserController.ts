@@ -1,11 +1,9 @@
 import { Request, Response } from 'express';
 import UserServices from '../services/UserServices'
-import { connectDB } from '../config/database';
 
 const userService = new UserServices();
 
 class UserController {
-
 
     getAllUsers = async (_req: Request, res: Response):Promise<void> => {
         try {
@@ -43,11 +41,10 @@ class UserController {
         try {
             const {username, email, password} = req.body;
             const userId = req.params.id;
-            await userService.updateUserByIdInDb(username, email, password, userId);
-            
+            await userService.updateUserByIdInDb(username, email, password, userId); 
             res.status(200).json({ message: "Usuário atualizado" });
         } catch (err) {
-
+            res.status(500).json({ message: "Erro ao atualizar usuário" });
         }
     };
 
@@ -65,7 +62,6 @@ class UserController {
         try {
             const userId = req.params.id;
             await userService.deleteUserByIdInDb(userId);
-
             res.status(200).json({ message: "Usuário deletado" });
         } catch (err) {
             console.log("Erro ao deletar usuário");
