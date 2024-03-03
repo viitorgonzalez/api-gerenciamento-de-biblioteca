@@ -7,7 +7,7 @@ const userService = new UserServices();
 class UserController {
 
 
-    getAllUsers = async (_req: Request, res: Response) => {
+    getAllUsers = async (_req: Request, res: Response):Promise<void> => {
         try {
             const users = await userService.getAllUsersFromDb();
             res.send(users);
@@ -17,7 +17,7 @@ class UserController {
         }
     };
 
-    getUserById = async (req: Request, res: Response) => {
+    getUserById = async (req: Request, res: Response):Promise<void> => {
         try {
             const userId = req.params.id;
             const user = await userService.getUserByIdFromDb(userId);
@@ -28,7 +28,7 @@ class UserController {
         }
     };
 
-    postNewUser = async (req: Request, res: Response) => {
+    postNewUser = async (req: Request, res: Response):Promise<void> => {
         try {
             const {username, email, password} = req.body;
             await userService.postNewUserToDb(username, email, password);
@@ -39,7 +39,7 @@ class UserController {
         }
     }
 
-    updateUserById = async (req: Request, res: Response) => {
+    updateUserById = async (req: Request, res: Response):Promise<void> => {
         try {
             const {username, email, password} = req.body;
             const userId = req.params.id;
