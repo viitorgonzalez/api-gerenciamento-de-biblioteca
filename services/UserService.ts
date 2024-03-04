@@ -28,7 +28,7 @@ class UserServices {
         }
     };
 
-    postNewUserToDb = async (username: string, email: string, password: string):Promise<void> => {
+    postNewUserToDb = async (username: string, email: string, password: string): Promise<void> => {
         try {
             const connection = await connectDB();
             await connection.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [username, email, password]);
@@ -39,7 +39,7 @@ class UserServices {
         }
     };
 
-    updateUserByIdInDb = async (username: string, email: string, password: string, userId: string):Promise<void> => {
+    updateUserByIdDb = async (username: string, email: string, password: string, userId: string): Promise<void> => {
         try{ 
             const connection = await connectDB();
             await connection.query('UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?', [username, email, password, userId]);
@@ -50,7 +50,7 @@ class UserServices {
         }
     };
 
-    deleteAllUsersDb = async ():Promise<void> => {
+    deleteAllUsersDb = async (): Promise<void> => {
         try {
             const connection = await connectDB();
             await connection.query('DELETE FROM users');
@@ -60,7 +60,7 @@ class UserServices {
         }
     };
 
-    deleteUserByIdInDb = async (userId: string):Promise<void> => {
+    deleteUserByIdDb = async (userId: string): Promise<void> => {
         try {
             const connection = await connectDB();
             await connection.query('DELETE FROM users WHERE id = ?', [userId]);

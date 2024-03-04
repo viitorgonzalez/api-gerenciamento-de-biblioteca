@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import UserServices from '../services/UserServices'
+import UserServices from '../services/UserService'
 
 const userService = new UserServices();
 
 class UserController {
 
-    getAllUsers = async (_req: Request, res: Response):Promise<void> => {
+    getAllUsers = async (_req: Request, res: Response): Promise<void> => {
         try {
             const users = await userService.getAllUsersFromDb();
             res.send(users);
@@ -15,7 +15,7 @@ class UserController {
         }
     };
 
-    getUserById = async (req: Request, res: Response):Promise<void> => {
+    getUserById = async (req: Request, res: Response): Promise<void> => {
         try {
             const userId = req.params.id;
             const user = await userService.getUserByIdFromDb(userId);
@@ -26,7 +26,7 @@ class UserController {
         }
     };
 
-    postNewUser = async (req: Request, res: Response):Promise<void> => {
+    postNewUser = async (req: Request, res: Response): Promise<void> => {
         try {
             const {username, email, password} = req.body;
             await userService.postNewUserToDb(username, email, password);
@@ -35,20 +35,20 @@ class UserController {
             console.log("Erro ao postar usuário:", err);
             res.status(500).json({ message: "Erro ao postar usuário" });
         }
-    }
+    };
 
-    updateUserById = async (req: Request, res: Response):Promise<void> => {
+    updateUserById = async (req: Request, res: Response): Promise<void> => {
         try {
             const {username, email, password} = req.body;
             const userId = req.params.id;
-            await userService.updateUserByIdInDb(username, email, password, userId); 
+            await userService.updateUserByIdDb(username, email, password, userId); 
             res.status(200).json({ message: "Usuário atualizado" });
         } catch (err) {
             res.status(500).json({ message: "Erro ao atualizar usuário" });
         }
     };
 
-    deleteAllUsers = async (_req: Request, res: Response):Promise<void> => {
+    deleteAllUsers = async (_req: Request, res: Response): Promise<void> => {
         try {
             await userService.deleteAllUsersDb();
             res.status(200).json({ message: "Todos os usuários foram deletados" });
@@ -58,10 +58,10 @@ class UserController {
         }
     };
 
-    deleteUserById = async (req: Request, res: Response):Promise<void> => {
+    deleteUserById = async (req: Request, res: Response): Promise<void> => {
         try {
             const userId = req.params.id;
-            await userService.deleteUserByIdInDb(userId);
+            await userService.deleteUserByIdDb(userId);
             res.status(200).json({ message: "Usuário deletado" });
         } catch (err) {
             console.log("Erro ao deletar usuário");

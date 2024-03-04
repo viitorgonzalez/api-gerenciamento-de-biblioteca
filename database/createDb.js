@@ -52,10 +52,10 @@ function createSchemaAndTables() {
                     return [4 /*yield*/, connection.query("USE ".concat(process.env.DB_NAME))];
                 case 2:
                     _a.sent();
-                    return [4 /*yield*/, connection.query("\n            CREATE TABLE IF NOT EXISTS books (\n                id INT AUTO_INCREMENT PRIMARY KEY,\n                title VARCHAR(100) NOT NULL,\n                author VARCHAR(100) NOT NULL,\n                genre VARCHAR(100) NOT NULL\n            )\n        ")];
+                    return [4 /*yield*/, connection.query("\n            CREATE TABLE IF NOT EXISTS users (\n                id INT AUTO_INCREMENT PRIMARY KEY,\n                username VARCHAR(100) NOT NULL,\n                email VARCHAR(100) NOT NULL UNIQUE,\n                password VARCHAR(100) NOT NULL\n                \n            )\n        ")];
                 case 3:
                     _a.sent();
-                    return [4 /*yield*/, connection.query("\n            CREATE TABLE IF NOT EXISTS users (\n                id INT AUTO_INCREMENT PRIMARY KEY,\n                username VARCHAR(100) NOT NULL,\n                email VARCHAR(100) NOT NULL UNIQUE,\n                password VARCHAR(100) NOT NULL\n            )\n        ")];
+                    return [4 /*yield*/, connection.query("\n            CREATE TABLE IF NOT EXISTS books (\n                id INT AUTO_INCREMENT PRIMARY KEY,\n                user_id INT,\n                title VARCHAR(100) NOT NULL,\n                author VARCHAR(100) NOT NULL,\n                genre VARCHAR(100) NOT NULL,\n                FOREIGN KEY (user_id) REFERENCES users(id)\n            )\n        ")];
                 case 4:
                     _a.sent();
                     console.log('Esquema e tabelas criados com sucesso');
