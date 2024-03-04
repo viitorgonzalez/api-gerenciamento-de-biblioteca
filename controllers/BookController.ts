@@ -23,7 +23,6 @@ class BookController {
         } catch (err) {
             console.log("Erro ao obter livro");
             res.status(500).json({ message: "Erro ao obter livro" });
-
         }
     };
 
