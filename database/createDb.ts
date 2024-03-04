@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 
 config();
 
-async function createSchemaAndTables() {
+async function createSchemaAndTables(): Promise<void> {
     try {
         const connection = await connectDB();
         await connection.query(`USE ${process.env.DB_NAME}`);
