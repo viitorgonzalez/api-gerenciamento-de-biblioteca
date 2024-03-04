@@ -57,6 +57,7 @@ class UserServices {
             await connection.end();
         } catch (err) {
             console.log("Erro ao deletar users", err);
+            throw err;
         }
     };
 
@@ -67,6 +68,7 @@ class UserServices {
             await connection.end();
         } catch (err) {
             console.log("Erro ao deletar user", err);
+            throw err;
         }
     };
 
